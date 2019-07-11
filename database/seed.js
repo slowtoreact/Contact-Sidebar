@@ -1710,3 +1710,5 @@ const insertRestaurants = function() {
 };
 
 insertRestaurants();
+
+module.exports = restaurantData;
