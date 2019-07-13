@@ -25,7 +25,9 @@
     "@babel/preset-env": "^7.5.0",
     "@babel/preset-react": "^7.0.0",
     "@shelf/jest-mongodb": "^1.1.0",
+    "chai": "^4.2.0",
     "jest": "^24.8.0",
+    "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
     "webpack": "^4.35.2",
     "webpack-cli": "^3.3.5"

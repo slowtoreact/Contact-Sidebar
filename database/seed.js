@@ -889,7 +889,7 @@ const restaurantData = [
       },
       {
         name: "MERCANTILE DINING AND PROVISIONS",
-        address: "1701 Wynkoop St, #155 Denver, CO 80202",
+        address: "1701 Wynkoop St #155, Denver, CO 80202",
         phone: "(720)460-3733",
         website: "https://www.mercantiledenver.com",
         openTable: false,
