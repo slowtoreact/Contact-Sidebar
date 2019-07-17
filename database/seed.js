@@ -71,7 +71,7 @@ const restaurantData = [
         }
       },
       {
-        name: "BAR TACO",
+        name: "BARTACO",
         address: "1048 Pearl St, Ste. 101 Boulder, CO 80302",
         phone: "(719)249-8226",
         website: "https://www.bartaco/location.boulder.com",
@@ -1706,9 +1706,8 @@ const restaurantData = [
 
 const insertRestaurants = function() {
   Restaurant.create(restaurantData)
-    .then(() => db.close());
+    .then(() => db.db.close());
 };
 
 insertRestaurants();
 
-module.exports = restaurantData;

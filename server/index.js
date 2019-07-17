@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const Restaurant = require('../database/restaurant.js');
+const db = require('../database/index.js');
 
 const app = express();
 const PORT = 3000;
@@ -14,9 +14,10 @@ app.use(express.static(__dirname + '/../client/public'));
 
 //take req.body, pass into .find function at db, take response,
 //send to props, and pass
-app.get('/api/contact', function(req, res) {
-  res.status = 200;
-    return res.send(res.status)
+app.get('/api/contact/:name', function(req, res) {
+    db.findRestaurantData(req.params.name, (dbResponse)=>{
+      res.status(200).send(dbResponse)
+    })
 });
 
 
