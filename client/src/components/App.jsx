@@ -11,8 +11,9 @@ class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          currentRestaurant: 'THE KITCHEN',
-          restaurantData: null
+          currentRestaurant: 'VENICE ITALIAN RESTAURANT',
+          restaurantData: null,
+          dailyHoursHidden: true
       }
     }
 
@@ -33,12 +34,24 @@ class App extends React.Component {
             cb(response.data);
           });
         }
-    
+        
+        toggleDailyHours () {
+          this.setState({
+            dailyHoursHidden: !this.state.dailyHoursHidden
+          })
+        }
+
+        handleHoursClick() {
+           this.toggleDailyHours()
+        }
     render(){
         return(
             <div>
                 <div>
-                    <Hours hours={this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}/>
+                    <Hours hours={this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}
+                      clickHandler = {this.handleHoursClick.bind(this)}
+                      isHidden = {this.state.dailyHoursHidden}
+                    />
                 </div>
                 <div>
                     <Location />

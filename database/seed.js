@@ -657,11 +657,11 @@ const restaurantData = [
         openTable: false,
         openTableLink: "",
         hoursOpen: {
-          Monday: ['00:01-00:00'],
-          Tuesday: ['00:01-00:00'],
-          Wednesday: ['00:01-00:00'],
-          Thursday: ['00:01-00:00'],
-          Friday: ['00:01-15:00'],
+          Monday: ['00:00-00:00'],
+          Tuesday: ['00:00-00:00'],
+          Wednesday: ['00:00-00:00'],
+          Thursday: ['00:00-00:00'],
+          Friday: ['00:00-15:00'],
           Saturday: [''],
           Sunday: ['12:00-00:00']
         }
