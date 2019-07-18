@@ -6,6 +6,7 @@ import Phone from './Phone.jsx';
 import WebLink from './WebLink.jsx';
 import Directions from './Directions.jsx';
 import axios from 'axios';
+import WeeklyHours from './WeeklyHours.jsx'
 
 class App extends React.Component {
     constructor(props) {
@@ -13,14 +14,31 @@ class App extends React.Component {
       this.state = {
           currentRestaurant: 'VENICE ITALIAN RESTAURANT',
           restaurantData: null,
-          dailyHoursHidden: true
+          dailyHoursHidden: true,
+          dayAndTime: []
       }
     }
 
       componentDidMount() {
+        this.setDate()
         this.loadRestaurant (this.setRestaurantData.bind(this));
       }
      
+      setDate() {
+        let now = new Date()
+        let time = [];
+        time.push(now.getDay())
+        time.push(now.getHours())
+        time.push(now.getMinutes())
+        this.setState({
+          dayAndTime: time
+        }) 
+      }
+
+      loadTime(cb){
+        cb()
+      }
+
       setRestaurantData(data) {
         this.setState({
           restaurantData: data[0]
@@ -30,7 +48,6 @@ class App extends React.Component {
       loadRestaurant(cb) {
         axios.get(`api/contact/${this.state.currentRestaurant}`)
           .then(function (response) {
-            console.log(response), 'first .then';
             cb(response.data);
           });
         }
@@ -48,11 +65,14 @@ class App extends React.Component {
         return(
             <div>
                 <div>
-                    <Hours hours={this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}
+                    <Hours 
                       clickHandler = {this.handleHoursClick.bind(this)}
-                      isHidden = {this.state.dailyHoursHidden}
+                      dayAndTime = {this.state.dayAndTime}
                     />
                 </div>
+                <div>
+                {!this.state.dailyHoursHidden && <WeeklyHours hours={this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}/>}
+            </div>
                 <div>
                     <Location />
                 </div>

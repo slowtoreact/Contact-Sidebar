@@ -4,13 +4,13 @@ import DailyHours from './DailyHours.jsx'
 
 const WeeklyHours = (props) => {
     if(typeof(props.hours) !== 'string'){
+        let keyIndex = 0;
         return (
             <div>
-                {console.log(Object.entries(props.hours))}
                 {Object.entries(props.hours).map((day)=>{
                     return(
                         <div> 
-                            <DailyHours hours = {day} key = {day[0]}/>
+                            <DailyHours hours = {day} key = {++keyIndex%7}/>
                         </div> 
                     )
                 })

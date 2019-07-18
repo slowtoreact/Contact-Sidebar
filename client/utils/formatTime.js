@@ -36,8 +36,3 @@ const formatTimeString = (timeString) => {
 
 export default formatTimeString;
 
-
-
-// // show
-// alert(timeValue);
-// console.log(timeValue);
