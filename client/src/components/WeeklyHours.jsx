@@ -9,7 +9,7 @@ const WeeklyHours = (props) => {
             <div>
                 {Object.entries(props.hours).map((day)=>{
                     return(
-                        <div> 
+                        <div key ={keyIndex}> 
                             <DailyHours hours = {day} key = {++keyIndex%7}/>
                         </div> 
                     )

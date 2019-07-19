@@ -6,22 +6,35 @@ import Phone from './Phone.jsx';
 import WebLink from './WebLink.jsx';
 import Directions from './Directions.jsx';
 import axios from 'axios';
-import WeeklyHours from './WeeklyHours.jsx'
+import WeeklyHours from './WeeklyHours.jsx';
+import compareTime from '../../utils/compareTime.js';
+import getDaysHours from '../../utils/getDaysHours.js';
 
 class App extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          currentRestaurant: 'VENICE ITALIAN RESTAURANT',
+          currentRestaurant: 'THE KITCHEN',
           restaurantData: null,
           dailyHoursHidden: true,
-          dayAndTime: []
+          dayAndTime: this.setDate(),
+          isOpen: true
       }
     }
 
       componentDidMount() {
-        this.setDate()
-        this.loadRestaurant (this.setRestaurantData.bind(this));
+        this.loadRestaurant()
+        .then(
+          (data) => {
+            this.setRestaurantData(data)
+            return data[0]
+          }
+        )
+        .then(
+          (restaurant) => {
+            this.setIsOpen(restaurant)
+          }
+        )
       }
      
       setDate() {
@@ -30,13 +43,15 @@ class App extends React.Component {
         time.push(now.getDay())
         time.push(now.getHours())
         time.push(now.getMinutes())
-        this.setState({
-          dayAndTime: time
-        }) 
+        return time 
       }
 
-      loadTime(cb){
-        cb()
+      setIsOpen(restaurant) {
+        let currentTimeArray = this.state.dayAndTime
+        let dayStringArray = getDaysHours(currentTimeArray[0],restaurant.hoursOpen)
+        this.setState({
+          isOpen: compareTime(currentTimeArray, dayStringArray)
+        })
       }
 
       setRestaurantData(data) {
@@ -45,10 +60,10 @@ class App extends React.Component {
         });
       }
     
-      loadRestaurant(cb) {
-        axios.get(`api/contact/${this.state.currentRestaurant}`)
+      loadRestaurant() {
+          return axios.get(`api/contact/${this.state.currentRestaurant}`)
           .then(function (response) {
-            cb(response.data);
+            return (response.data);
           });
         }
         
@@ -68,19 +83,21 @@ class App extends React.Component {
                     <Hours 
                       clickHandler = {this.handleHoursClick.bind(this)}
                       dayAndTime = {this.state.dayAndTime}
+                      isOpen = {this.state.isOpen}
+                      weekHours = {this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}
                     />
                 </div>
                 <div>
                 {!this.state.dailyHoursHidden && <WeeklyHours hours={this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}/>}
             </div>
                 <div>
-                    <Location />
+                    <Location  location = {this.state.restaurantData && this.state.restaurantData.address || 'Loading'}/>
                 </div>
                 <div>
-                    <Phone />
+                    <Phone phone = {this.state.restaurantData && this.state.restaurantData.phone || 'Loading'}/>
                 </div>
                 <div>
-                    <WebLink />
+                    <WebLink website = {this.state.restaurantData && this.state.restaurantData.website || 'Loading'}/>
                 </div>
                 <div>
                     <Directions />

@@ -1,10 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+import path from 'path';
 
 const WebLink = (props) => {
     return (
         <div>
-            <a href = "https://wwww.thekitchenbistros.com/location/boulder-colorado/">www.thekitchenbistros.com</a>
+            <a href = {props.website}>{path.basename(props.website)}</a>
         </div>
     )
 }
