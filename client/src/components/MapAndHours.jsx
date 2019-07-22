@@ -9,6 +9,8 @@ import axios from 'axios';
 import WeeklyHours from './WeeklyHours.jsx';
 import compareTime from '../../utils/compareTime.js';
 import getDaysHours from '../../utils/getDaysHours.js';
+// axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+// axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
 
 class MapAndHours extends React.Component {
     constructor(props) {
@@ -63,7 +65,7 @@ class MapAndHours extends React.Component {
     
       loadRestaurant() {
         //TODO change route to docker container 
-          return axios.get(`api/contact/${this.state.currentRestaurant}`)
+          return axios.get(`http://localhost:3000/api/contact/${this.state.currentRestaurant}`)
           .then(function (response) {
             return (response.data);
           });
