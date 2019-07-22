@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import MapAndHours from './components/MapAndHours.jsx';
   
 
 
 
-ReactDOM.render(<App />, document.getElementById('side-bar'));
+ReactDOM.render(<MapAndHours />, document.getElementById('mapAndHours'));

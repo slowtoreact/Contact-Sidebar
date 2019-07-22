@@ -10,11 +10,11 @@ import WeeklyHours from './WeeklyHours.jsx';
 import compareTime from '../../utils/compareTime.js';
 import getDaysHours from '../../utils/getDaysHours.js';
 
-class App extends React.Component {
+class MapAndHours extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          currentRestaurant: 'THE KITCHEN',
+          currentRestaurant: 'CENTRO',
           restaurantData: null,
           dailyHoursHidden: true,
           dayAndTime: this.setDate(),
@@ -49,8 +49,9 @@ class App extends React.Component {
       setIsOpen(restaurant) {
         let currentTimeArray = this.state.dayAndTime
         let dayStringArray = getDaysHours(currentTimeArray[0],restaurant.hoursOpen)
+        let isOpen = compareTime(currentTimeArray, dayStringArray)
         this.setState({
-          isOpen: compareTime(currentTimeArray, dayStringArray)
+          isOpen: isOpen
         })
       }
 
@@ -61,6 +62,7 @@ class App extends React.Component {
       }
     
       loadRestaurant() {
+        //TODO change route to docker container 
           return axios.get(`api/contact/${this.state.currentRestaurant}`)
           .then(function (response) {
             return (response.data);
@@ -78,7 +80,7 @@ class App extends React.Component {
         }
     render(){
         return(
-            <div>
+            <div className = "contactBar">
                 <div>
                     <Hours 
                       clickHandler = {this.handleHoursClick.bind(this)}
@@ -107,4 +109,4 @@ class App extends React.Component {
     }
 }
 
-export default App
+export default MapAndHours

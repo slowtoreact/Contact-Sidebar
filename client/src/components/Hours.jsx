@@ -11,6 +11,7 @@ const Hours = (props) => {
            {props.isOpen &&  <span>OPEN NOW</span>}
            {!props.isOpen && <span>CLOSED</span>}
             <span>·</span>
+            
             {/* {props.isOpen && typeof(props.weekHours)!=='string' &&<span>{formatTimeString(getDaysHours(props.timeAndDay, props.weekHours))}</span>} */}
         </div>
     )
