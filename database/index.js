@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 const mongoUri = process.env.MONGO_CONNECTION || 'mongodb://mongo:27017/FEC';
 const Restaurant= require('./restaurant.js')
 
-mongoose.connect(mongoUri, { useNewUrlParser: true }).catch((err)=>{mongoose.connect(mongoUri, { useNewUrlParser: true })})
+mongoose.connect(mongoUri, { useNewUrlParser: true })
+// .catch((err)=>{mongoose.connect(mongoUri, { useNewUrlParser: true })})
 
 var db = mongoose.connection;
 

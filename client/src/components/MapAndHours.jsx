@@ -85,7 +85,7 @@ class MapAndHours extends React.Component {
             <div className = "contactBar">
                 <div>
                     <Hours 
-                      clickHandler = {this.handleHoursClick.bind(this)}
+                      clickHandler = {this.toggleDailyHours.bind(this)}
                       dayAndTime = {this.state.dayAndTime}
                       isOpen = {this.state.isOpen}
                       weekHours = {this.state.restaurantData && this.state.restaurantData.hoursOpen || 'Loading'}

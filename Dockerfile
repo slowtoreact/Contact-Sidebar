@@ -5,4 +5,4 @@ COPY package.json package-lock.json ./
 RUN npm install
 copy . .
 EXPOSE 3000
-CMD ["npm","run","db:setup"]
+CMD ["npm","start"]
