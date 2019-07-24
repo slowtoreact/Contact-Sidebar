@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoUri = process.env.MONGO_CONNECTION || 'mongodb://mongo:27017/FEC';
+const mongoUri = process.env.MONGO_CONNECTION || 'mongodb://localhost:27017/FEC';
 const Restaurant= require('./restaurant.js')
 
 mongoose.connect(mongoUri, { useNewUrlParser: true })
